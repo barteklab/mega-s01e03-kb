@@ -1,0 +1,53 @@
+---
+layout: runbook
+title: '#4471 split · three problems, not one'
+owner: bartlab
+status: open
+reviewed: 2026-10-29
+signature: bartlab
+---
+
+<script>
+  import ProblemSplit from '#lib/kb/ProblemSplit.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/barteklab/mega-s01e03-kb/issues';
+  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. It is not one issue. Its
+reports describe three different problems, and the queued parser fix covers only the first.
+
+<Callout kind="warn">
+Shipping the parser fix will not close #4471. The booking-v3 hint and the one-day move keep coming
+in after it. Each now has a ticket of its own.
+</Callout>
+
+## The three problems
+
+<ProblemSplit ticket={4471} {tickets} />
+
+- **`parser`**: the shared parser reads every date month first. Day-first tenants get day and
+  month swapped: "Our 7 April reminder went out on 4 July."
+- **`hint`**: booking-v3's date field prints `MM/DD/YYYY`. At day-first tenants people type the
+  month first, as told, and the form reads the day first. Only form bookings at booking-v3
+  tenants. The parser fix does not reach it: the form already reads the tenant's way.
+- **`one-day`**: the booking lands one day off, not swapped. "Client in Lisbon got Tuesday.
+  Client in Toronto got Monday." That is a time-zone shift, not a format. The desk flagged these
+  in its notes, but the #4471 page still counts them under the parser.
+
+## How the reports were placed
+
+By the tenant, not by intake's tag. Intake guesses the cause from the reporter's browser; the
+cause depends on the tenant's locale and booking form (`causes.ts`). The two disagree in both
+directions on this ticket. The ticket export also repeats some reports; each id counts once.
+
+## Why one ticket hid three
+
+Triage merges on subject line alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)).
+Every one of these reports has a date-sounding subject ("Wrong day on the invite", "Dates mixed
+up"), so they all merged into the first open date ticket, whatever the body said. The body is
+where the problems differ.
+
+<RenderStamp {signature} />
