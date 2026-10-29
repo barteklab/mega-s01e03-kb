@@ -16,12 +16,16 @@ signature: bartlab
   const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
 </script>
 
-[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. It is not one issue. Its
-reports describe three different problems, and the queued parser fix covers only the first.
+[#4471](/kb/incidents/4471) was marked known: one issue, one fix queued. It was not one issue. Its
+reports describe three different problems. Engineering closed #4471 on 5 October:
+
+- **`parser`**: fixed (`fix(dates): parse dd/mm for eu locales`).
+- **`hint`**: won't fix. The booking-v3 form is retired, so its hint goes with it.
+- **`one-day`**: not addressed. Neither change touches it.
 
 <Callout kind="warn">
-Shipping the parser fix will not close #4471. The booking-v3 hint and the one-day move keep coming
-in after it. Each now has a ticket of its own.
+#4471 is closed, but not every report in it is. The one-day moves are not a date format: no
+parser fix and no form change reaches them. Their ticket stays open.
 </Callout>
 
 ## The three problems
