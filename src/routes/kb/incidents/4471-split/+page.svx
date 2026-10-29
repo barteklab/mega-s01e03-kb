@@ -4,7 +4,7 @@ title: '#4471 split · three problems, not one'
 owner: bartlab
 status: open
 reviewed: 2026-10-29
-signature: bartlab
+signature: v1.eyJzdWIiOiIyOTAiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzMwNTU5NCwiZXhwIjoxNzkzMzkxOTk0fQ.ULg7w6FzfcEdxEq2DKrYQviMO86yefKUCp9F2yr2MTo
 ---
 
 <script>
